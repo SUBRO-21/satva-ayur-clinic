@@ -1,0 +1,34 @@
+1.What is the main purpose of this website?
+
+
+2.What are the essential features you expect?
+
+
+3.What patient details must be stored?
+
+
+4.What information must be recorded at each consultation?
+
+
+5.How do you currently maintain and retrieve patient records?
+
+
+6.Who will use the system, and what should each person be allowed to do?
+
+
+7.Do you need appointment booking?
+
+
+8.Do you need prescriptions, reports, or document uploads?
+
+
+9.Do you need billing, payment tracking, or medicine inventory?
+
+
+10.Do you have existing records that need to be transferred?
+
+
+11.What is your budget and preferred launch date?
+
+
+12.Who will maintain the website and patient records after launch?

@@ -1,0 +1,24 @@
+---
+// Ruled list of treatments: name, one-line summary, link. Used on the home page and under each treatment.
+import type { Treatment } from '../data/treatments';
+import { localePath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  items: Treatment[];
+}
+
+const { lang, items } = Astro.props;
+---
+
+<ul class="row-list">
+  {items.map((tr) => (
+    <li>
+      <a href={localePath(lang, `/treatments/${tr.slug}/`)}>
+        <span class="row-title">{tr.copy[lang].title}</span>
+        <span class="row-text">{tr.copy[lang].summary}</span>
+        <span class="row-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ul>

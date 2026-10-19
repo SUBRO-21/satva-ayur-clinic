@@ -1,0 +1,25 @@
+---
+// Booking prompt with both contact options, used at the end of most pages.
+import ContactButtons from './ContactButtons.astro';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+}
+
+const { lang, title } = Astro.props;
+const s = t(lang);
+---
+
+<section class="contact-block">
+  <div class="container contact-block-inner">
+    <div>
+      <h2>{title ?? s.cta.book}</h2>
+      <p>{s.cta.bookText}</p>
+    </div>
+    <div class="btn-row">
+      <ContactButtons lang={lang} showNumber />
+    </div>
+  </div>
+</section>

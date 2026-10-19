@@ -1,0 +1,20 @@
+---
+// The Call + WhatsApp pair. Every booking prompt on the site uses this.
+import { clinic } from '../config';
+import { t, whatsappLink, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** 'full' for page content, 'short' for the compact mobile bar. */
+  size?: 'full' | 'short';
+  showNumber?: boolean;
+}
+
+const { lang, size = 'full', showNumber = false } = Astro.props;
+const s = t(lang);
+const callLabel = size === 'short' ? s.cta.call : s.cta.callFull;
+const waLabel = size === 'short' ? s.cta.whatsapp : s.cta.whatsappFull;
+---
+
+<a class="btn btn-primary" href={`tel:${clinic.phoneHref}`}>{callLabel}{showNumber && ` · ${clinic.phone}`}</a>
+<a class="btn btn-secondary" href={whatsappLink(clinic.whatsapp, s.cta.whatsappMessage)} target="_blank" rel="noopener">{waLabel}</a>

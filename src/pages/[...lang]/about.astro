@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
+import { clinic } from '../../config';
+import { langStaticPaths, t, type Lang } from '../../i18n/ui';
+import { physicianSchema } from '../../lib/schema';
+
+export const getStaticPaths = langStaticPaths;
+
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+---
+
+<Base lang={lang} title={s.about.metaTitle} description={s.about.metaDescription} path="/about/" jsonLd={[physicianSchema(Astro.site!)]}>
+  <section class="page-head">
+    <div class="container narrow">
+      <h1>{s.about.title}</h1>
+      <p class="lead">{s.about.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container doctor">
+      <PhotoPlaceholder label="doctor portrait" variant="portrait" />
+      <div>
+        <p class="eyebrow">{s.about.doctorTitle}</p>
+        <h2 class="doctor-name">{clinic.doctor.name}</h2>
+        {s.about.doctorBody.map((p) => <p>{p}</p>)}
+        <dl class="facts">
+          <div><dt>{s.about.credentials}</dt><dd>{clinic.doctor.qualification}</dd></div>
+          <div><dt>{s.about.registration}</dt><dd>{clinic.doctor.registration}</dd></div>
+          <div><dt>{clinic.doctor.experienceYears}+</dt><dd>{s.about.experience}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <PhotoPlaceholder label="therapy room (wide, landscape)" />
+
+  <section class="section">
+    <div class="container two-col">
+      <div class="col-head">
+        <h2>{s.about.clinicTitle}</h2>
+      </div>
+      <div class="prose">
+        {s.about.clinicBody.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <ContactBlock lang={lang} />
+</Base>

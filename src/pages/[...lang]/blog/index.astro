@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { formatDate, langStaticPaths, localePath, t, type Lang } from '../../../i18n/ui';
+import { getPosts, postSlug } from '../../../lib/blog';
+
+export const getStaticPaths = langStaticPaths;
+
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+const posts = await getPosts(lang);
+---
+
+<Base lang={lang} title={s.blog.metaTitle} description={s.blog.metaDescription} path="/blog/">
+  <section class="page-head">
+    <div class="container narrow">
+      <h1>{s.blog.title}</h1>
+      <p class="lead">{s.blog.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      {posts.length === 0 ? (
+        <p>
+          {s.blog.empty} <a class="text-link" href={localePath('en', '/blog/')}>{s.blog.emptyLink}</a>
+        </p>
+      ) : (
+        <ul class="post-list post-list-full">
+          {posts.map((post) => (
+            <li>
+              <p class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, lang)}</time>
+                {post.data.category && <span> · {post.data.category}</span>}
+              </p>
+              <h2><a href={localePath(lang, `/blog/${postSlug(post)}/`)}>{post.data.title}</a></h2>
+              <p>{post.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>

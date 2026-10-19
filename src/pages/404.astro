@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { langs, localePath, t } from '../i18n/ui';
+
+// One 404 page for the whole site, with the message in all three languages.
+const s = t('en');
+---
+
+<Base lang="en" title={s.notFound.title} description={s.notFound.text} path="/404/" available={[]} fontLangs={langs} noindex>
+  <section class="page-head">
+    <div class="container narrow">
+      {langs.map((l) => (
+        <div class="not-found" lang={l}>
+          <h1>{t(l).notFound.title}</h1>
+          <p>{t(l).notFound.text} <a class="text-link" href={localePath(l, '/')}>{t(l).notFound.home}</a></p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

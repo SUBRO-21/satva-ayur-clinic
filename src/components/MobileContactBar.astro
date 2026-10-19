@@ -1,0 +1,15 @@
+---
+// Always-visible Call / WhatsApp bar on small screens.
+import ContactButtons from './ContactButtons.astro';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="mobile-bar">
+  <ContactButtons lang={lang} size="short" />
+</div>

@@ -1,0 +1,14 @@
+---
+// Stand-in for real clinic photography. Replace each use with an <Image /> before launch.
+interface Props {
+  label: string;
+  /** 'band' = full-width landscape strip, 'portrait' = doctor photo. */
+  variant?: 'band' | 'portrait';
+}
+
+const { label, variant = 'band' } = Astro.props;
+---
+
+<div class={`photo-placeholder photo-${variant}`} role="img" aria-label={`Placeholder: ${label}`}>
+  <span>Photo — {label}</span>
+</div>

@@ -1,0 +1,79 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import ContactBlock from '../../../components/ContactBlock.astro';
+import { formatDate, langParam, languages, localePath, t, type Lang } from '../../../i18n/ui';
+import { getAllPosts, postLang, postSlug, type Post } from '../../../lib/blog';
+import { articleSchema, breadcrumbSchema } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => {
+    const slug = postSlug(post);
+    const translations = posts.filter((p) => postSlug(p) === slug).map(postLang);
+    return {
+      params: { lang: langParam(postLang(post)), slug },
+      props: { post, translations },
+    };
+  });
+}
+
+const { post, translations } = Astro.props as { post: Post; translations: Lang[] };
+const lang = postLang(post);
+const s = t(lang);
+const path = `/blog/${postSlug(post)}/`;
+const url = new URL(localePath(lang, path), Astro.site).href;
+const { Content } = await render(post);
+const { title, description, author, pubDate, updatedDate } = post.data;
+const otherLangs = translations.filter((l) => l !== lang);
+---
+
+<Base
+  lang={lang}
+  title={title}
+  description={description}
+  path={path}
+  available={translations}
+  fallbackPath="/blog/"
+  type="article"
+  jsonLd={[
+    articleSchema({ site: Astro.site!, url, title, description, author, pubDate, updatedDate, lang: languages[lang].htmlLang }),
+    breadcrumbSchema([
+      { name: s.blog.title, url: new URL(localePath(lang, '/blog/'), Astro.site).href },
+      { name: title, url },
+    ]),
+  ]}
+>
+  <article>
+    <header class="page-head">
+      <div class="container narrow">
+        <p class="breadcrumb"><a href={localePath(lang, '/blog/')}>{s.blog.back}</a></p>
+        <h1>{title}</h1>
+        <p class="post-meta">
+          {s.blog.by} {author}{' · '}<time datetime={pubDate.toISOString()}>{formatDate(pubDate, lang)}</time>
+          {updatedDate && (
+            <span> · {s.blog.updated} <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate, lang)}</time></span>
+          )}
+        </p>
+        {otherLangs.length > 0 && (
+          <p class="post-meta">
+            {s.blog.otherLangs}:{' '}
+            {otherLangs.map((l, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={localePath(l, path)} hreflang={languages[l].htmlLang} lang={languages[l].htmlLang}>{languages[l].label}</a>
+              </>
+            ))}
+          </p>
+        )}
+      </div>
+    </header>
+    <div class="section">
+      <div class="container narrow prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <ContactBlock lang={lang} />
+</Base>

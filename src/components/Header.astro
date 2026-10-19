@@ -1,0 +1,73 @@
+---
+import { clinic } from '../config';
+import { languages, langs, localePath, t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+  available: Lang[];
+  fallbackPath: string;
+}
+
+const { lang, path, available, fallbackPath } = Astro.props;
+const s = t(lang);
+
+const links = [
+  { href: '/', label: s.nav.home },
+  { href: '/treatments/', label: s.nav.treatments },
+  { href: '/about/', label: s.nav.about },
+  { href: '/blog/', label: s.nav.blog },
+  { href: '/contact/', label: s.nav.contact },
+];
+
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const switchHref = (l: Lang) => localePath(l, available.includes(l) ? path : fallbackPath);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={localePath(lang, '/')}>
+      <span class="brand-name">{clinic.shortName}</span>
+      <span class="brand-sub">{s.brandSub}</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label={s.navLabel}>
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={localePath(lang, l.href)} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <ul class="lang-switch" aria-label={s.language}>
+        {langs.map((l) => (
+          <li>
+            <a
+              href={switchHref(l)}
+              hreflang={languages[l].htmlLang}
+              lang={languages[l].htmlLang}
+              aria-current={l === lang ? 'true' : undefined}
+            >{languages[l].label}</a>
+          </li>
+        ))}
+      </ul>
+      <a class="btn btn-primary btn-sm header-call" href={`tel:${clinic.phoneHref}`}>{s.cta.call}</a>
+    </div>
+
+    <details class="nav-mobile">
+      <summary>{s.menu}</summary>
+      <nav aria-label={s.navLabel}>
+        <ul>
+          {links.map((l) => (
+            <li>
+              <a href={localePath(lang, l.href)} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
