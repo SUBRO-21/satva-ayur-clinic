@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satva font options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f8f4; --card: #edf0e9; --ink: #26302a; --muted: #5f6b63;
+    --mint: #3ca370; --mint-dark: #2f8a5d; --tint: #e3f1e8;
+    --head: 'Source Serif 4', Georgia, serif;
+    --body: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, sans-serif; padding: 32px 20px 80px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1.page { font: 600 28px/1.2 system-ui, sans-serif; margin: 0 0 6px; }
+  p.sub { color: var(--muted); margin: 0 0 32px; }
+  h2.section { font: 600 13px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--mint-dark); margin: 48px 0 16px; }
+
+  /* Mixer */
+  .mixer { background: #fff; border-radius: 16px; padding: 20px; position: sticky; top: 12px; z-index: 5; box-shadow: 0 2px 12px #26302a14; display: flex; flex-wrap: wrap; gap: 16px; align-items: end; }
+  .mixer label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+  .mixer select { font-size: 15px; padding: 8px 12px; border-radius: 8px; border: 1px solid #c7cfc4; background: var(--bg); min-width: 200px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; }
+  .presets button { font-size: 13px; padding: 8px 14px; border-radius: 999px; border: 1px solid #c4e3d0; background: var(--tint); color: var(--mint-dark); cursor: pointer; }
+  .presets button:hover { background: #c4e3d0; }
+
+  /* Live preview mock */
+  .preview { margin-top: 20px; background: var(--bg); border: 1px solid #dfe4dc; border-radius: 16px; overflow: hidden; }
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; font-family: var(--body); font-size: 15px; flex-wrap: wrap; gap: 12px; }
+  .logo { font-family: var(--head); font-size: 24px; font-weight: 500; }
+  .links { display: flex; gap: 22px; color: var(--muted); flex-wrap: wrap; }
+  .pill { background: var(--mint); color: #fff; border-radius: 999px; padding: 10px 20px; font-family: var(--body); font-weight: 500; font-size: 15px; display: inline-block; }
+  .pill.soft { background: var(--tint); color: var(--mint-dark); }
+  .hero { padding: 40px 28px 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+  .eyebrow { font-family: var(--body); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--mint-dark); }
+  .hero h3 { font-family: var(--head); font-weight: 400; font-size: clamp(36px, 5vw, 56px); line-height: 1.1; letter-spacing: -0.01em; margin: 14px 0 16px; }
+  .lead { font-family: var(--body); font-size: 18px; line-height: 1.6; color: var(--muted); margin: 0 0 24px; }
+  .photo { aspect-ratio: 4/5; max-height: 360px; border-radius: 16px; background: linear-gradient(160deg, #c4e3d0, #9bd0b1); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 28px 36px; }
+  .card { background: var(--card); border-radius: 12px; padding: 20px; }
+  .card h4 { font-family: var(--head); font-weight: 500; font-size: 22px; margin: 0 0 8px; }
+  .card p { font-family: var(--body); font-size: 15px; line-height: 1.55; color: var(--muted); margin: 0 0 12px; }
+  .card a { font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--mint-dark); text-decoration: none; }
+
+  /* Specimens */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .spec { background: #fff; border-radius: 16px; padding: 22px; }
+  .spec .name { font: 600 13px system-ui, sans-serif; color: var(--muted); display: flex; justify-content: space-between; }
+  .spec .tag { font-size: 11px; background: var(--tint); color: var(--mint-dark); padding: 2px 8px; border-radius: 999px; }
+  .spec .big { font-size: 38px; line-height: 1.15; margin: 14px 0 10px; }
+  .spec .small { font-size: 16px; line-height: 1.6; color: var(--muted); margin: 0; }
+  .spec .note { font: 13px/1.5 system-ui, sans-serif; color: var(--muted); margin-top: 12px; border-top: 1px solid #edf0e9; padding-top: 10px; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .links { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page">Satva font options</h1>
+  <p class="sub">Choose a heading font and a body font. The preview below updates as you change them. The colours are the "Soft &amp; calm" design.</p>
+
+  <div class="mixer">
+    <label>Heading font
+      <select id="head">
+        <option>Source Serif 4</option><option>Playfair Display</option><option>EB Garamond</option>
+        <option>Inter</option><option>Roboto</option><option>Poppins</option><option>Montserrat</option><option>Plus Jakarta Sans</option>
+      </select>
+    </label>
+    <label>Body font
+      <select id="body">
+        <option>Inter</option><option>Roboto</option><option>Poppins</option><option>Montserrat</option><option>Plus Jakarta Sans</option>
+        <option>Source Serif 4</option><option>Playfair Display</option><option>EB Garamond</option>
+      </select>
+    </label>
+    <div class="presets">
+      <button data-h="Source Serif 4" data-b="Inter">★ Source Serif 4 + Inter</button>
+      <button data-h="EB Garamond" data-b="Plus Jakarta Sans">EB Garamond + Plus Jakarta</button>
+      <button data-h="Playfair Display" data-b="Inter">Playfair + Inter</button>
+      <button data-h="Poppins" data-b="Poppins">Poppins only</button>
+      <button data-h="Montserrat" data-b="Roboto">Montserrat + Roboto</button>
+    </div>
+  </div>
+
+  <div class="preview" id="preview">
+    <div class="nav">
+      <span class="logo">Satva Ayurveda</span>
+      <span class="links"><span>Treatments</span><span>About</span><span>Blog</span><span>Contact</span></span>
+      <span class="pill">Book consultation</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Ayurvedic clinic · Bengaluru</div>
+        <h3>Classical Ayurveda, practised with care.</h3>
+        <p class="lead">Consultations, Panchakarma and herbal care at our clinic in Bengaluru. Treatment is decided only after an in-person assessment.</p>
+        <span class="pill">Call the clinic</span>&nbsp; <span class="pill soft">WhatsApp</span>
+      </div>
+      <div class="photo"></div>
+    </div>
+    <div class="cards">
+      <div class="card"><h4>Panchakarma</h4><p>Classical five-step detox therapies, planned around your constitution.</p><a>Learn more →</a></div>
+      <div class="card"><h4>Joint and back care</h4><p>Supportive therapies and herbal care for stiffness and pain.</p><a>Learn more →</a></div>
+      <div class="card"><h4>Skin and hair</h4><p>Gentle, personalised care for common skin and scalp concerns.</p><a>Learn more →</a></div>
+    </div>
+  </div>
+
+  <h2 class="section">Each font on its own</h2>
+  <div class="grid" id="specimens"></div>
+</div>
+
+<script>
+  const fonts = [
+    ['Source Serif 4', 'serif', 'Calm, readable and modern. Works well as both a heading and a body font. My recommendation.'],
+    ['Playfair Display', 'serif', 'High contrast and elegant. Best only for large headings, because it gets hard to read at small sizes.'],
+    ['EB Garamond', 'serif', 'Classic and bookish. Feels traditional, which suits Ayurveda. It looks small, so use bigger sizes.'],
+    ['Inter', 'sans', 'Very clean and clinical. Reads very well at small sizes on phones.'],
+    ['Roboto', 'sans', 'Neutral and familiar (Android). Safe, but a little generic.'],
+    ['Poppins', 'sans', 'Round and friendly. Can look playful, and long paragraphs read wide.'],
+    ['Montserrat', 'sans', 'Wide and bold. Good for headings, but heavy for long body text.'],
+    ['Plus Jakarta Sans', 'sans', 'Modern and soft. This is what the current design uses for body text.'],
+  ];
+  const stack = (f, kind) => `'${f}', ${kind === 'serif' ? 'Georgia, serif' : 'system-ui, sans-serif'}`;
+  const kindOf = f => fonts.find(x => x[0] === f)[1];
+
+  document.getElementById('specimens').innerHTML = fonts.map(([f, k, note]) => `
+    <div class="spec">
+      <div class="name">${f}<span class="tag">${k === 'serif' ? 'Serif' : 'Sans-serif'}</span></div>
+      <div class="big" style="font-family:${stack(f, k)}">Classical Ayurveda, practised with care.</div>
+      <p class="small" style="font-family:${stack(f, k)}">Consultations, Panchakarma and herbal care. Mon – Sat, 9:00 am – 7:00 pm. +91 90000 00000</p>
+      <div class="note">${note}</div>
+    </div>`).join('');
+
+  const head = document.getElementById('head'), body = document.getElementById('body');
+  const apply = () => {
+    document.documentElement.style.setProperty('--head', stack(head.value, kindOf(head.value)));
+    document.documentElement.style.setProperty('--body', stack(body.value, kindOf(body.value)));
+  };
+  head.onchange = body.onchange = apply;
+  document.querySelectorAll('.presets button').forEach(b => b.onclick = () => { head.value = b.dataset.h; body.value = b.dataset.b; apply(); });
+  apply();
+</script>
+</body>
+</html>
