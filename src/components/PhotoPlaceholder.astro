@@ -1,14 +1,23 @@
 ---
 // Stand-in for real clinic photography. Replace each use with an <Image /> before launch.
+// With `src`, shows a placeholder photo (from the clinic brochure) under the label.
 interface Props {
   label: string;
-  /** 'band' = full-width landscape strip, 'portrait' = doctor photo. */
-  variant?: 'band' | 'portrait';
+  /** 'band' = full-width landscape strip, 'portrait' = doctor photo, 'frame' = rounded photo in a column. */
+  variant?: 'band' | 'portrait' | 'frame';
+  src?: string;
 }
 
-const { label, variant = 'band' } = Astro.props;
+const { label, variant = 'band', src } = Astro.props;
 ---
 
-<div class={`photo-placeholder photo-${variant}`} role="img" aria-label={`Placeholder: ${label}`}>
-  <span>Photo — {label}</span>
-</div>
+{src ? (
+  <figure class={`photo photo-${variant}`}>
+    <img src={src} alt="" loading={variant === 'frame' ? 'eager' : 'lazy'} />
+    <figcaption>Photo — {label}</figcaption>
+  </figure>
+) : (
+  <div class={`photo-placeholder photo-${variant}`} role="img" aria-label={`Placeholder: ${label}`}>
+    <span>Photo — {label}</span>
+  </div>
+)}

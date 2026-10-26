@@ -14,7 +14,11 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <p class="footer-name">{clinic.name}</p>
+      <p class="footer-brand">
+        <img class="brand-emblem" src="/images/logo.jpg" alt="" width="40" height="40" loading="lazy" />
+        <span class="footer-name">{clinic.name}</span>
+      </p>
+      <p class="footer-tagline">{clinic.tagline}…</p>
       <address>
         {fullAddress}<br />
         <a href={`tel:${clinic.phoneHref}`}>{clinic.phone}</a><br />

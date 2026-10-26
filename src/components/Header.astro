@@ -27,8 +27,11 @@ const switchHref = (l: Lang) => localePath(l, available.includes(l) ? path : fal
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href={localePath(lang, '/')}>
-      <span class="brand-name">{clinic.shortName}</span>
-      <span class="brand-sub">{s.brandSub}</span>
+      <img class="brand-emblem" src="/images/logo.jpg" alt="" width="48" height="48" />
+      <span class="brand-text">
+        <span class="brand-name">{clinic.shortName}</span>
+        <span class="brand-sub">{s.brandSub}</span>
+      </span>
     </a>
 
     <nav class="nav-desktop" aria-label={s.navLabel}>

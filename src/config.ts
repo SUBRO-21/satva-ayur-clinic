@@ -3,8 +3,9 @@
 // Keep name, address and phone written exactly as they appear on the Google Business Profile.
 
 export const clinic = {
-  name: 'Satva Ayurveda Clinic', // TODO: confirm exact registered name
-  shortName: 'Satva',
+  name: 'Satva Ayur Health Centre', // Name as printed on the clinic brochure
+  tagline: 'Life through Ayurveda',
+  shortName: 'Satva Ayur',
   doctor: {
     name: 'Dr. [Doctor Name]',
     qualification: 'BAMS, MD (Ayurveda)', // TODO

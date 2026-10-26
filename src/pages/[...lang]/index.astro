@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
 import ContactButtons from '../../components/ContactButtons.astro';
 import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
-import TreatmentList from '../../components/TreatmentList.astro';
+import TreatmentCards from '../../components/TreatmentCards.astro';
 import { clinic, fullAddress } from '../../config';
 import { treatments } from '../../data/treatments';
 import { formatDate, langStaticPaths, localePath, t, type Lang } from '../../i18n/ui';
@@ -15,6 +15,8 @@ export const getStaticPaths = langStaticPaths;
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const posts = (await getPosts(lang)).slice(0, 3);
+// Placeholder photos for blog cards until posts have their own images.
+const postImages = ['/images/greeva-basti.jpg', '/images/abhyanga.jpg', '/images/janu-basti.jpg'];
 ---
 
 <Base
@@ -26,41 +28,66 @@ const posts = (await getPosts(lang)).slice(0, 3);
   jsonLd={[clinicSchema(Astro.site!)]}
 >
   <section class="hero">
-    <div class="container">
-      <p class="eyebrow">{s.home.eyebrow}</p>
-      <h1 class="hero-title">{s.home.title}</h1>
-      <div class="hero-body">
+    <div class="container hero-split">
+      <div>
+        <p class="eyebrow">{s.home.eyebrow}</p>
+        <h1 class="hero-title">{s.home.title}</h1>
         <p class="lead">{s.home.text}</p>
+        <div class="btn-row">
+          <ContactButtons lang={lang} />
+        </div>
+        <p class="hero-meta">{s.hours.text} · {s.hours.closed}</p>
+      </div>
+      <PhotoPlaceholder label="clinic interior or a therapy in progress" variant="frame" src="/images/shirodhara.jpg" />
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <div class="container">
+      <dl class="trust-row">
+        <div><dt>{clinic.doctor.experienceYears}+</dt><dd>{s.home.trust.years}</dd></div>
+        <div><dt>{clinic.doctor.qualification}</dt><dd>{s.home.trust.qualification}</dd></div>
+        <div><dt>{clinic.doctor.registration}</dt><dd>{s.home.trust.registration}</dd></div>
+        <div><dt>{s.hours.text.split(',')[0]}</dt><dd>{s.hours.text.split(',').slice(1).join(',').trim()}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head-row">
         <div>
-          <div class="btn-row">
-            <ContactButtons lang={lang} />
-          </div>
-          <p class="hero-meta">{s.hours.text} · {s.hours.closed}</p>
+          <p class="eyebrow">{s.home.treatmentsTitle}</p>
+          <h2>{s.home.treatmentsText}</h2>
+        </div>
+        <a class="text-link" href={localePath(lang, '/treatments/')}>{s.treatments.all} →</a>
+      </div>
+      <TreatmentCards lang={lang} items={treatments} linkLabel={s.home.learnMore} />
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="container">
+      <div class="panel doctor">
+        <PhotoPlaceholder label="doctor portrait" variant="portrait" />
+        <div>
+          <p class="eyebrow">{s.home.doctorTitle}</p>
+          <h2 class="doctor-name">{clinic.doctor.name}</h2>
+          <p class="muted">{clinic.doctor.qualification} · {clinic.doctor.registration}</p>
+          <p>{s.home.doctorText}</p>
+          <a class="text-link" href={localePath(lang, '/about/')}>{s.home.doctorLink} →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <PhotoPlaceholder label="clinic interior or a therapy in progress (wide, landscape)" />
-
-  <section class="section">
-    <div class="container two-col">
-      <div class="col-head">
-        <h2>{s.home.treatmentsTitle}</h2>
-        <p class="muted">{s.home.treatmentsText}</p>
-      </div>
-      <TreatmentList lang={lang} items={treatments} />
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container two-col">
-      <div class="col-head">
-        <h2>{s.home.approachTitle}</h2>
-      </div>
-      <ol class="steps">
-        {s.home.approach.map((step) => (
+  <section class="section section-tight">
+    <div class="container">
+      <h2 class="center-title">{s.home.approachTitle}</h2>
+      <ol class="panel steps">
+        {s.home.approach.map((step, i) => (
           <li>
+            <span class="step-number" aria-hidden="true">{i + 1}</span>
             <h3>{step.title}</h3>
             <p>{step.text}</p>
           </li>
@@ -69,32 +96,24 @@ const posts = (await getPosts(lang)).slice(0, 3);
     </div>
   </section>
 
-  <section class="section">
-    <div class="container doctor">
-      <PhotoPlaceholder label="doctor portrait" variant="portrait" />
-      <div>
-        <p class="eyebrow">{s.home.doctorTitle}</p>
-        <h2 class="doctor-name">{clinic.doctor.name}</h2>
-        <p class="muted">{clinic.doctor.qualification}</p>
-        <p>{s.home.doctorText}</p>
-        <a class="text-link" href={localePath(lang, '/about/')}>{s.home.doctorLink} →</a>
-      </div>
-    </div>
-  </section>
-
   {posts.length > 0 && (
-    <section class="section section-rule">
+    <section class="section section-tight">
       <div class="container">
         <div class="section-head-row">
           <h2>{s.home.blogTitle}</h2>
           <a class="text-link" href={localePath(lang, '/blog/')}>{s.home.blogLink} →</a>
         </div>
-        <ul class="post-list">
-          {posts.map((post) => (
+        <ul class="card-grid">
+          {posts.map((post, i) => (
             <li>
-              <p class="post-meta"><time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, lang)}</time></p>
-              <h3><a href={localePath(lang, `/blog/${postSlug(post)}/`)}>{post.data.title}</a></h3>
-              <p>{post.data.description}</p>
+              <a class="card post-card" href={localePath(lang, `/blog/${postSlug(post)}/`)}>
+                <img src={postImages[i % postImages.length]} alt="" loading="lazy" />
+                <span class="card-body">
+                  <time class="post-meta" datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, lang)}</time>
+                  <span class="card-title">{post.data.title}</span>
+                  <span class="card-text">{post.data.description}</span>
+                </span>
+              </a>
             </li>
           ))}
         </ul>
@@ -102,15 +121,17 @@ const posts = (await getPosts(lang)).slice(0, 3);
     </section>
   )}
 
-  <section class="section section-rule">
-    <div class="container two-col">
-      <div class="col-head">
-        <h2>{s.home.visitTitle}</h2>
-        <address class="visit-address">{fullAddress}</address>
-        <p>{s.hours.text}<br />{s.hours.closed}</p>
-        <a class="text-link" href={clinic.mapsLink} target="_blank" rel="noopener">{s.contact.directions} →</a>
+  <section class="section section-tight">
+    <div class="container">
+      <div class="panel two-col">
+        <div>
+          <h2>{s.home.visitTitle}</h2>
+          <address class="visit-address">{fullAddress}</address>
+          <p>{s.hours.text}<br />{s.hours.closed}</p>
+          <a class="text-link" href={clinic.mapsLink} target="_blank" rel="noopener">{s.contact.directions} →</a>
+        </div>
+        <iframe class="map" src={clinic.mapsEmbed} title={s.contact.mapTitle} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-      <iframe class="map" src={clinic.mapsEmbed} title={s.contact.mapTitle} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 

@@ -14,12 +14,15 @@ interface TreatmentCopy {
 
 export interface Treatment {
   slug: string;
+  /** Placeholder photo from the clinic brochure, in public/images. */
+  image: string;
   copy: Record<Lang, TreatmentCopy>;
 }
 
 export const treatments: Treatment[] = [
   {
     slug: 'panchakarma',
+    image: '/images/abhyanga.jpg',
     copy: {
       en: {
         title: 'Panchakarma',
@@ -52,6 +55,7 @@ export const treatments: Treatment[] = [
   },
   {
     slug: 'joint-and-back-pain',
+    image: '/images/kati-basti.jpg',
     copy: {
       en: {
         title: 'Joint and back pain',
@@ -84,6 +88,7 @@ export const treatments: Treatment[] = [
   },
   {
     slug: 'skin-and-hair',
+    image: '/images/herbal-bowl.jpg',
     copy: {
       en: {
         title: 'Skin and hair',
@@ -116,6 +121,7 @@ export const treatments: Treatment[] = [
   },
   {
     slug: 'womens-health',
+    image: '/images/patra-pinda.jpg',
     copy: {
       en: {
         title: 'Women’s health',
@@ -148,6 +154,7 @@ export const treatments: Treatment[] = [
   },
   {
     slug: 'digestive-health',
+    image: '/images/nasya.jpg',
     copy: {
       en: {
         title: 'Digestive health',
@@ -174,6 +181,7 @@ export const treatments: Treatment[] = [
   },
   {
     slug: 'stress-and-sleep',
+    image: '/images/shirobasti.jpg',
     copy: {
       en: {
         title: 'Stress and sleep',
