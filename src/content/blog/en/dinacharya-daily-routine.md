@@ -3,6 +3,8 @@ title: 'Dinacharya: a simple Ayurvedic daily routine'
 description: 'Five small daily habits from Ayurveda — waking time, oil pulling, self-massage, regular meals and an early night — and why they matter.'
 pubDate: 2026-10-01
 category: 'Daily routine'
+cover: '/images/blog/dinacharya-oils.jpg'
+coverAlt: 'Ghee, sesame oil, turmeric and dried herbs used in an Ayurvedic daily routine'
 ---
 
 > Placeholder article. Replace with the doctor's own writing before launch.

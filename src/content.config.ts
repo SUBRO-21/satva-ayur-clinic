@@ -14,6 +14,9 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     author: z.string().default(clinic.doctor.name),
     category: z.string().optional(),
+    /** Cover photo in public/images, used as the thumbnail and at the top of the post. */
+    cover: z.string().default('/images/hero-room.jpg'),
+    coverAlt: z.string().default(''),
     draft: z.boolean().default(false),
   }),
 });

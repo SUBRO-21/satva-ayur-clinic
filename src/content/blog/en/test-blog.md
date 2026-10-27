@@ -4,6 +4,8 @@ title: 'A Simple Ayurvedic Daily Routine for Everyday Wellbeing'
 description: 'Explore daily routines inspired by Ayurveda, including regular meals, sleep habits and mindful self-care.'
 pubDate: 2026-10-19
 category: 'Daily routine'
+cover: '/images/blog/daily-routine-copper.jpg'
+coverAlt: 'A copper bowl with a flower held in an open hand'
 ---
 
 # A Simple Ayurvedic Daily Routine for Everyday Wellbeing

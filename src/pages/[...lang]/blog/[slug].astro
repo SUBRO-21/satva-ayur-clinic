@@ -24,7 +24,7 @@ const s = t(lang);
 const path = `/blog/${postSlug(post)}/`;
 const url = new URL(localePath(lang, path), Astro.site).href;
 const { Content } = await render(post);
-const { title, description, author, pubDate, updatedDate } = post.data;
+const { title, description, author, pubDate, updatedDate, cover, coverAlt } = post.data;
 const otherLangs = translations.filter((l) => l !== lang);
 ---
 
@@ -34,7 +34,6 @@ const otherLangs = translations.filter((l) => l !== lang);
   description={description}
   path={path}
   available={translations}
-  fallbackPath="/blog/"
   type="article"
   jsonLd={[
     articleSchema({ site: Astro.site!, url, title, description, author, pubDate, updatedDate, lang: languages[lang].htmlLang }),
@@ -45,7 +44,7 @@ const otherLangs = translations.filter((l) => l !== lang);
   ]}
 >
   <article>
-    <header class="page-head">
+    <header class="page-head page-head-dark bg-photo" style={`--bg-image: url(${cover})`}>
       <div class="container narrow">
         <p class="breadcrumb"><a href={localePath(lang, '/blog/')}>{s.blog.back}</a></p>
         <h1>{title}</h1>
@@ -70,6 +69,9 @@ const otherLangs = translations.filter((l) => l !== lang);
     </header>
     <div class="section">
       <div class="container narrow prose">
+        <figure class="post-cover">
+          <img src={cover} alt={coverAlt} />
+        </figure>
         <Content />
       </div>
     </div>

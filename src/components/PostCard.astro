@@ -1,0 +1,29 @@
+---
+// Blog post card: cover thumbnail, date, category, title and summary.
+import { formatDate, localePath, t, type Lang } from '../i18n/ui';
+import { postSlug, type Post } from '../lib/blog';
+
+interface Props {
+  lang: Lang;
+  post: Post;
+  /** Wide layout with the image beside the text, for the newest post. */
+  featured?: boolean;
+}
+
+const { lang, post, featured = false } = Astro.props;
+const s = t(lang);
+const { title, description, pubDate, category, cover } = post.data;
+---
+
+<a class:list={['post-card', { 'post-card-featured': featured }]} href={localePath(lang, `/blog/${postSlug(post)}/`)}>
+  <img class="post-thumb" src={cover} alt="" loading="lazy" />
+  <span class="card-body">
+    <span class="post-meta">
+      <time datetime={pubDate.toISOString()}>{formatDate(pubDate, lang)}</time>
+      {category && <span class="chip">{category}</span>}
+    </span>
+    <span class="card-title">{title}</span>
+    <span class="card-text">{description}</span>
+    <span class="card-link">{s.blog.read} →</span>
+  </span>
+</a>

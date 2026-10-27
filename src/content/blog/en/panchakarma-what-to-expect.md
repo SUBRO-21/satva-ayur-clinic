@@ -3,6 +3,8 @@ title: 'Panchakarma: what to expect at your first programme'
 description: 'How a Panchakarma programme is planned, what happens on each day, and how to prepare — a practical guide for first-time patients.'
 pubDate: 2026-09-15
 category: 'Treatments'
+cover: '/images/blog/panchakarma-pinda.jpg'
+coverAlt: 'A therapist using warm herbal poultices during an Ayurvedic massage'
 ---
 
 > Placeholder article. Replace with the doctor's own writing before launch.

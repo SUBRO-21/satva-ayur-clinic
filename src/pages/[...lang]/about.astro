@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
+import Icon from '../../components/Icon.astro';
 import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
 import { clinic } from '../../config';
 import { langStaticPaths, t, type Lang } from '../../i18n/ui';
@@ -10,41 +11,61 @@ export const getStaticPaths = langStaticPaths;
 
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
+const highlightIcons = ['doctor', 'leaf', 'bottle', 'child'] as const;
 ---
 
 <Base lang={lang} title={s.about.metaTitle} description={s.about.metaDescription} path="/about/" jsonLd={[physicianSchema(Astro.site!)]}>
-  <section class="page-head">
+  <section class="page-head page-head-dark bg-photo" style="--bg-image: url(/images/shirodhara-garden.jpg)">
     <div class="container narrow">
+      <p class="eyebrow">{clinic.tagline}…</p>
       <h1>{s.about.title}</h1>
       <p class="lead">{s.about.intro}</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container doctor">
-      <PhotoPlaceholder label="doctor portrait" variant="portrait" />
+    <div class="container philosophy">
       <div>
-        <p class="eyebrow">{s.about.doctorTitle}</p>
-        <h2 class="doctor-name">{clinic.doctor.name}</h2>
-        {s.about.doctorBody.map((p) => <p>{p}</p>)}
-        <dl class="facts">
-          <div><dt>{s.about.credentials}</dt><dd>{clinic.doctor.qualification}</dd></div>
-          <div><dt>{s.about.registration}</dt><dd>{clinic.doctor.registration}</dd></div>
-          <div><dt>{clinic.doctor.experienceYears}+</dt><dd>{s.about.experience}</dd></div>
-        </dl>
+        <p class="pill-label">{s.home.philosophyEyebrow}</p>
+        <h2 class="display">{s.home.philosophyTitle}</h2>
+        {s.about.clinicBody.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="principle-panel bg-photo on-dark" style="--bg-image: url(/images/hero-room.jpg)">
+        {s.home.principles.map((p) => (
+          <blockquote class="principle">
+            <p class="principle-name">{p.name}</p>
+            <p>{p.text}</p>
+          </blockquote>
+        ))}
       </div>
     </div>
   </section>
 
-  <PhotoPlaceholder label="therapy room (wide, landscape)" />
+  <section class="highlights">
+    <ul class="container highlight-row">
+      {s.home.highlights.map((h, i) => (
+        <li>
+          <span class="icon-badge"><Icon name={highlightIcons[i]} /></span>
+          <span><strong>{h.title}</strong><span>{h.text}</span></span>
+        </li>
+      ))}
+    </ul>
+  </section>
 
-  <section class="section">
-    <div class="container two-col">
-      <div class="col-head">
-        <h2>{s.about.clinicTitle}</h2>
-      </div>
-      <div class="prose">
-        {s.about.clinicBody.map((p) => <p>{p}</p>)}
+  <section class="section tone-sand">
+    <div class="container">
+      <div class="panel doctor">
+        <PhotoPlaceholder label="doctor portrait" variant="portrait" />
+        <div>
+          <p class="pill-label">{s.about.doctorTitle}</p>
+          <h2 class="doctor-name">{clinic.doctor.name}</h2>
+          {s.about.doctorBody.map((p) => <p>{p}</p>)}
+          <dl class="facts">
+            <div><dt>{s.about.credentials}</dt><dd>{clinic.doctor.qualification}</dd></div>
+            <div><dt>{s.about.registration}</dt><dd>{clinic.doctor.registration}</dd></div>
+            <div><dt>{clinic.doctor.experienceYears}+</dt><dd>{s.about.experience}</dd></div>
+          </dl>
+        </div>
       </div>
     </div>
   </section>

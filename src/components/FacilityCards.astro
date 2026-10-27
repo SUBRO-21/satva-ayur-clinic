@@ -1,0 +1,40 @@
+---
+// Grid of facility cards: name, sub-name and tagline, with the photo faint behind.
+import type { Facility } from '../data/facilities';
+import { localePath, t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  items: Facility[];
+  /** Add a closing "View all facilities" tile. */
+  showAll?: boolean;
+}
+
+const { lang, items, showAll = false } = Astro.props;
+const s = t(lang);
+---
+
+<ul class="card-grid card-grid-4">
+  {items.map((f) => (
+    <li>
+      <a class="card bg-photo" href={localePath(lang, `/facilities/${f.slug}/`)} style={`--bg-image: url(${f.image})`}>
+        <span class="card-body">
+          <span class="card-kicker">{f.therapies.length} {f.slug === 'weight-management' ? s.facilities.programmes : s.facilities.therapies}</span>
+          <span class="card-title">{f.title}</span>
+          <span class="card-text">{f.tagline}</span>
+          <span class="card-link">{s.home.learnMore} →</span>
+        </span>
+      </a>
+    </li>
+  ))}
+  {showAll && (
+    <li>
+      <a class="card card-cta" href={localePath(lang, '/facilities/')}>
+        <span class="card-body">
+          <span class="card-title">{s.facilities.viewAll} →</span>
+          <span class="card-text">{s.facilities.intro}</span>
+        </span>
+      </a>
+    </li>
+  )}
+</ul>

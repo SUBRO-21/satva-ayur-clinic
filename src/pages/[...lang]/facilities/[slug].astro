@@ -1,0 +1,93 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ContactBlock from '../../../components/ContactBlock.astro';
+import FacilityCards from '../../../components/FacilityCards.astro';
+import Icon from '../../../components/Icon.astro';
+import { facilities, type Facility } from '../../../data/facilities';
+import { langParam, langs, localePath, t, type Lang } from '../../../i18n/ui';
+import { breadcrumbSchema } from '../../../lib/schema';
+
+export function getStaticPaths() {
+  return langs.flatMap((lang) =>
+    facilities.map((facility) => ({
+      params: { lang: langParam(lang), slug: facility.slug },
+      props: { lang, facility },
+    })),
+  );
+}
+
+const { lang, facility } = Astro.props as { lang: Lang; facility: Facility };
+const s = t(lang);
+const path = `/facilities/${facility.slug}/`;
+const abs = (p: string) => new URL(localePath(lang, p), Astro.site).href;
+const others = facilities.filter((f) => f.slug !== facility.slug);
+---
+
+<Base
+  lang={lang}
+  title={s.facilities.pageTitle.replace('{title}', facility.title)}
+  description={`${facility.subtitle}. ${facility.intro}`}
+  path={path}
+  jsonLd={[
+    breadcrumbSchema([
+      { name: s.nav.facilities, url: abs('/facilities/') },
+      { name: facility.title, url: abs(path) },
+    ]),
+  ]}
+>
+  <section class="page-head page-head-dark bg-photo" style={`--bg-image: url(${facility.image})`}>
+    <div class="container narrow">
+      <p class="breadcrumb"><a href={localePath(lang, '/facilities/')}>{s.facilities.all}</a></p>
+      <p class="eyebrow">{facility.subtitle}</p>
+      <h1>{facility.title}</h1>
+      <p class="lead">{facility.intro}</p>
+    </div>
+  </section>
+
+  <section class="section tone-sand">
+    <div class="container">
+      <ul class="therapy-grid">
+        {facility.therapies.map((th) => (
+          <li class="therapy">
+            <div class="therapy-head">
+              <h2>{th.name}</h2>
+              {th.duration && <span class="chip">{th.duration}</span>}
+            </div>
+            {th.formats && (
+              <p class="chip-row">
+                <span class="chip chip-soft">{s.facilities.fullBody} · {th.formats.fullBody}</span>
+                <span class="chip chip-soft">{s.facilities.local} · {th.formats.local}</span>
+              </p>
+            )}
+            {th.text && <p>{th.text}</p>}
+            {th.includes && (
+              <p class="chip-row">
+                {th.includes.map((item) => <span class="chip chip-soft">{item}</span>)}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      {facility.notes && (
+        <div class="notes">
+          <h2>{s.facilities.notes}</h2>
+          <ul class="check-list">
+            {facility.notes.map((n) => <li><Icon name="check" />{n}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <ContactBlock lang={lang} title={s.facilities.ask} />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head-row">
+        <h2>{s.facilities.all}</h2>
+      </div>
+      <FacilityCards lang={lang} items={others} />
+    </div>
+  </section>
+</Base>

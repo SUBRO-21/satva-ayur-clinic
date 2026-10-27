@@ -1,27 +1,25 @@
 ---
 import { clinic } from '../config';
-import { languages, langs, localePath, t, type Lang } from '../i18n/ui';
+import { facilities } from '../data/facilities';
+import { localePath, t, whatsappLink, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
   path: string;
-  available: Lang[];
-  fallbackPath: string;
 }
 
-const { lang, path, available, fallbackPath } = Astro.props;
+const { lang, path } = Astro.props;
 const s = t(lang);
 
 const links = [
   { href: '/', label: s.nav.home },
-  { href: '/treatments/', label: s.nav.treatments },
+  { href: '/facilities/', label: s.nav.facilities, mega: true },
   { href: '/about/', label: s.nav.about },
   { href: '/blog/', label: s.nav.blog },
   { href: '/contact/', label: s.nav.contact },
 ];
 
 const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
-const switchHref = (l: Lang) => localePath(l, available.includes(l) ? path : fallbackPath);
 ---
 
 <header class="site-header">
@@ -37,27 +35,40 @@ const switchHref = (l: Lang) => localePath(l, available.includes(l) ? path : fal
     <nav class="nav-desktop" aria-label={s.navLabel}>
       <ul>
         {links.map((l) => (
-          <li>
-            <a href={localePath(lang, l.href)} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+          <li class={l.mega ? 'has-mega' : undefined}>
+            <a href={localePath(lang, l.href)} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+              {l.label}{l.mega && <span class="caret" aria-hidden="true">▾</span>}
+            </a>
+            {l.mega && (
+              /* Opens on hover or keyboard focus; the link above still goes to the Facilities page. */
+              <div class="mega">
+                <div class="mega-inner">
+                  <div class="mega-intro">
+                    <p class="eyebrow">{s.nav.facilities}</p>
+                    <p class="mega-title">{s.facilities.menuText}</p>
+                    <a class="text-link" href={localePath(lang, '/facilities/')}>{s.facilities.viewAll} →</a>
+                  </div>
+                  <ul class="mega-grid">
+                    {facilities.map((f) => (
+                      <li>
+                        <a class="mega-card bg-photo" href={localePath(lang, `/facilities/${f.slug}/`)} style={`--bg-image: url(${f.image})`}>
+                          <span class="mega-card-title">{f.title}</span>
+                          <span class="mega-card-text">{f.tagline}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>
     </nav>
 
     <div class="header-actions">
-      <ul class="lang-switch" aria-label={s.language}>
-        {langs.map((l) => (
-          <li>
-            <a
-              href={switchHref(l)}
-              hreflang={languages[l].htmlLang}
-              lang={languages[l].htmlLang}
-              aria-current={l === lang ? 'true' : undefined}
-            >{languages[l].label}</a>
-          </li>
-        ))}
-      </ul>
-      <a class="btn btn-primary btn-sm header-call" href={`tel:${clinic.phoneHref}`}>{s.cta.call}</a>
+      <a class="btn btn-soft btn-sm" href={whatsappLink(clinic.whatsapp, s.cta.whatsappMessage)} target="_blank" rel="noopener">{s.cta.whatsapp}</a>
+      <a class="btn btn-primary btn-sm" href={`tel:${clinic.phoneHref}`}>{s.cta.bookShort}</a>
     </div>
 
     <details class="nav-mobile">
@@ -67,6 +78,13 @@ const switchHref = (l: Lang) => localePath(l, available.includes(l) ? path : fal
           {links.map((l) => (
             <li>
               <a href={localePath(lang, l.href)} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+              {l.mega && (
+                <ul class="nav-sub">
+                  {facilities.map((f) => (
+                    <li><a href={localePath(lang, `/facilities/${f.slug}/`)}>{f.title}</a></li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>

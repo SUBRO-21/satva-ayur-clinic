@@ -1,0 +1,47 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ContactBlock from '../../../components/ContactBlock.astro';
+import FacilityCards from '../../../components/FacilityCards.astro';
+import Icon from '../../../components/Icon.astro';
+import { facilities, services } from '../../../data/facilities';
+import { langStaticPaths, t, type Lang } from '../../../i18n/ui';
+
+export const getStaticPaths = langStaticPaths;
+
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+const serviceIcons = ['doctor', 'bottle', 'child'] as const;
+---
+
+<Base lang={lang} title={s.facilities.metaTitle} description={s.facilities.metaDescription} path="/facilities/">
+  <section class="page-head page-head-dark bg-photo" style="--bg-image: url(/images/hero-room.jpg)">
+    <div class="container narrow">
+      <p class="eyebrow">{s.home.facilitiesTitle}</p>
+      <h1>{s.facilities.title}</h1>
+      <p class="lead">{s.facilities.intro}</p>
+    </div>
+  </section>
+
+  <section class="section tone-sand">
+    <div class="container">
+      <FacilityCards lang={lang} items={facilities} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="center-title">{s.facilities.servicesTitle}</h2>
+      <ul class="feature-grid">
+        {services.map((svc, i) => (
+          <li class="feature">
+            <span class="icon-badge"><Icon name={serviceIcons[i]} /></span>
+            <h3>{svc.title}</h3>
+            <p>{svc.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <ContactBlock lang={lang} />
+</Base>

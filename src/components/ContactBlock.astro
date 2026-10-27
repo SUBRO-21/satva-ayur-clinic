@@ -12,7 +12,7 @@ const { lang, title } = Astro.props;
 const s = t(lang);
 ---
 
-<section class="contact-block">
+<section class="contact-block bg-photo on-brand" style="--bg-image: url(/images/shirodhara-garden.jpg)">
   <div class="container contact-block-inner">
     <div>
       <h2>{title ?? s.cta.book}</h2>

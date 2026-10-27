@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects. "Treatments" was renamed "Facilities", and the Kannada/Hindi pages were retired.
+/treatments/*  /facilities/  301
+/treatments    /facilities/  301
+/kn/*          /             301
+/hi/*          /             301

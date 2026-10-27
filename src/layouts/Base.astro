@@ -14,8 +14,6 @@ interface Props {
   path: string;
   /** Languages this page exists in. Defaults to all. */
   available?: Lang[];
-  /** Where the language switcher goes when this page has no translation. */
-  fallbackPath?: string;
   type?: 'website' | 'article';
   jsonLd?: object[];
   isHome?: boolean;
@@ -30,7 +28,6 @@ const {
   description,
   path,
   available = langs,
-  fallbackPath = '/',
   type = 'website',
   jsonLd = [],
   isHome = false,
@@ -43,10 +40,9 @@ const canonical = new URL(localePath(lang, path), site).href;
 const fullTitle = isHome ? `${clinic.name} | ${title}` : `${title} | ${clinic.name}`;
 const ogImage = new URL('/og-default.png', site).href;
 
+// Extra font families per language (e.g. Noto Sans Kannada) if more languages are added.
 const fonts: Record<Lang, string> = {
   en: '',
-  kn: '&family=Noto+Sans+Kannada:wght@400;500;600&family=Noto+Serif+Kannada:wght@500;600',
-  hi: '&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Serif+Devanagari:wght@500;600',
 };
 const fontsHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600${fontLangs.map((l) => fonts[l]).join('')}&display=swap`;
 ---
@@ -79,7 +75,7 @@ const fontsHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;6
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#d6e3bc" />
+    <meta name="theme-color" content="#1f3b2d" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -89,7 +85,7 @@ const fontsHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;6
   </head>
   <body>
     <a class="skip-link" href="#main">{t(lang).skip}</a>
-    <Header lang={lang} path={path} available={available} fallbackPath={fallbackPath} />
+    <Header lang={lang} path={path} />
     <main id="main">
       <slot />
     </main>
