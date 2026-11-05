@@ -9,7 +9,7 @@ export function clinicSchema(site: URL) {
     '@id': new URL('/#clinic', site).href,
     name: clinic.name,
     url: site.href,
-    telephone: clinic.phoneHref,
+    telephone: clinic.mobileHref,
     email: clinic.email,
     image: new URL('/og-default.png', site).href,
     address: {
@@ -40,7 +40,7 @@ export function physicianSchema(site: URL) {
     name: clinic.doctor.name,
     description: clinic.doctor.qualification,
     worksFor: { '@id': new URL('/#clinic', site).href },
-    telephone: clinic.phoneHref,
+    telephone: clinic.mobileHref,
   };
 }
 

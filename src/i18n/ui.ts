@@ -40,7 +40,6 @@ const en = {
     metaTitle: 'Ayurvedic Health Centre in J. P. Nagar, Bengaluru',
     metaDescription:
       'Satva Ayur Health Centre, J. P. Nagar: doctor consultation, Abhyangam, Shirodhara, Panchakarma, Swarna Prashana and an authorised Vaidyaratnam medicine counter.',
-    eyebrow: 'Welcome to nature’s cradle',
     title: 'Ayurveda, for a healthy you, today and tomorrow.',
     tagline: '“Life through Ayurveda…”',
     highlights: [

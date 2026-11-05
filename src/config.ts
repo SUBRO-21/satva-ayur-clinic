@@ -16,8 +16,6 @@ export const clinic = {
     registration: '[KAR Reg. No. 00000]', // TODO: state AYUSH registration number
     experienceYears: 10, // TODO
   },
-  phone: '080-26760088',
-  phoneHref: '+918026760088',
   mobile: '+91 94489 42843',
   mobileHref: '+919448942843',
   whatsapp: '919448942843', // TODO: confirm the mobile number is the clinic's WhatsApp
