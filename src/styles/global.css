@@ -548,6 +548,13 @@ ul, ol { padding: 0; margin: 0; }
   gap: var(--space-3);
   color: #e8efe9;
 }
+.facilities-intro { color: var(--ink-soft); font-size: var(--step-1); max-width: 46rem; margin-block: var(--space-2) var(--space-1); }
+/* Let the photo show through the panel; a gradient keeps the text readable. */
+.principle-panel.bg-photo::before { filter: saturate(0.9); mix-blend-mode: normal; opacity: 0.7; }
+.principle-panel.bg-photo::after { content: ''; background: linear-gradient(180deg, rgb(22 40 31 / 0.35) 0%, rgb(22 40 31 / 0.88) 70%); }
+@media (min-width: 56rem) {
+  .principle-panel { min-height: 26rem; align-content: end; }
+}
 .principle { margin: 0; padding-left: var(--space-3); border-left: 2px solid var(--gold); }
 .principle-name { font-family: var(--font-serif); font-style: italic; font-size: var(--step-2); color: #fff; margin-bottom: 0.25rem; }
 
@@ -645,15 +652,6 @@ ul, ol { padding: 0; margin: 0; }
 .therapy-head h3 { font-size: var(--step-1); font-weight: 500; margin: 0; }
 .therapy p:not(.chip-row) { color: var(--ink-soft); font-size: var(--step--1); }
 .notes { margin-top: var(--space-4); }
-
-/* Signature therapies on forest */
-.signature-grid { list-style: none; display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
-.signature {
-  background: rgb(255 255 255 / 0.06);
-  border: 1px solid rgb(255 255 255 / 0.16);
-  border-radius: var(--radius);
-  padding: var(--space-3);
-}
 
 /* Check list (facility notes) */
 .check-list { list-style: none; display: grid; gap: 0.75rem; }

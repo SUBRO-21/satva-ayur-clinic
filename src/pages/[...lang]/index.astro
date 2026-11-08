@@ -18,9 +18,8 @@ const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const posts = (await getPosts(lang)).slice(0, 3);
 const highlightIcons = ['doctor', 'leaf', 'bottle', 'child'] as const;
-const signature = facilities.find((f) => f.slug === 'ayur-satva-signature')!;
-// The signature programmes get their own band below, so leave them out of the main grid.
-const mainFacilities = facilities.filter((f) => f.slug !== signature.slug);
+// Signature programmes stay off the home grid (keeps it at two even rows); they have their own facility page.
+const mainFacilities = facilities.filter((f) => f.slug !== 'ayur-satva-signature');
 ---
 
 <Base
@@ -83,37 +82,12 @@ const mainFacilities = facilities.filter((f) => f.slug !== signature.slug);
         <div>
           <p class="pill-label">{s.home.facilitiesEyebrow}</p>
           <h2 class="display">{s.home.facilitiesTitle}</h2>
+          <p class="facilities-intro">{s.home.facilitiesIntro}</p>
           <p class="muted">{s.home.facilitiesText}</p>
         </div>
         <a class="text-link" href={localePath(lang, '/facilities/')}>{s.facilities.viewAll} →</a>
       </div>
       <FacilityCards lang={lang} items={mainFacilities} showAll />
-    </div>
-  </section>
-
-  <section class="section tone-forest bg-photo on-dark" style="--bg-image: url(/images/shirodhara-garden.jpg)">
-    <div class="container">
-      <div class="section-head-row">
-        <div>
-          <p class="pill-label">{s.home.signatureEyebrow}</p>
-          <h2 class="display">{s.home.signatureTitle}</h2>
-          <p>{s.home.signatureText}</p>
-        </div>
-        <a class="text-link" href={localePath(lang, `/facilities/${signature.slug}/`)}>{s.home.signatureLink} →</a>
-      </div>
-      <ul class="signature-grid">
-        {signature.therapies.map((th) => (
-          <li class="signature">
-            <div class="therapy-head">
-              <h3>{th.name}</h3>
-              <span class="chip">{th.duration}</span>
-            </div>
-            <p class="chip-row">
-              {th.includes?.map((item) => <span class="chip chip-soft">{item}</span>)}
-            </p>
-          </li>
-        ))}
-      </ul>
     </div>
   </section>
 
