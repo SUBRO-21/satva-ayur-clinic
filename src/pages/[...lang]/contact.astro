@@ -11,7 +11,7 @@ const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 ---
 
-<Base lang={lang} title={s.contact.metaTitle} description={s.contact.metaDescription} path="/contact/" jsonLd={[clinicSchema(Astro.site!)]}>
+<Base lang={lang} title={s.contact.metaTitle} description={s.contact.metaDescription} path="/contact/" heroImage="/images/hero-room.jpg" jsonLd={[clinicSchema(Astro.site!)]}>
   <section class="page-head page-head-dark bg-photo" style="--bg-image: url(/images/hero-room.jpg)">
     <div class="container narrow">
       <h1>{s.contact.title}</h1>

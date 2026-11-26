@@ -8,8 +8,6 @@ cover: '/images/blog/daily-routine-copper.jpg'
 coverAlt: 'A copper bowl with a flower held in an open hand'
 ---
 
-# A Simple Ayurvedic Daily Routine for Everyday Wellbeing
-
 Ayurveda is a traditional system of health that places importance on daily habits, food, rest and personal wellbeing. A consistent routine can help people become more mindful of how they organise their day.
 
 ## 1. Maintain a regular sleep schedule

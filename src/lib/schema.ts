@@ -12,6 +12,7 @@ export function clinicSchema(site: URL) {
     telephone: clinic.mobileHref,
     email: clinic.email,
     image: new URL('/og-default.png', site).href,
+    logo: new URL('/images/logo.jpg', site).href,
     address: {
       '@type': 'PostalAddress',
       streetAddress: `${clinic.address.street}, ${clinic.address.locality}`,
@@ -30,6 +31,19 @@ export function clinicSchema(site: URL) {
     hasMap: clinic.mapsLink,
     availableLanguage: ['English', 'Kannada', 'Hindi'],
     sameAs: clinic.social,
+  };
+}
+
+export function websiteSchema(site: URL) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': new URL('/#website', site).href,
+    name: clinic.name,
+    alternateName: clinic.shortName,
+    url: site.href,
+    inLanguage: 'en-IN',
+    publisher: { '@id': new URL('/#clinic', site).href },
   };
 }
 
@@ -52,6 +66,7 @@ export function articleSchema(opts: {
   author: string;
   pubDate: Date;
   updatedDate?: Date;
+  image?: string;
   lang: string;
 }) {
   return {
@@ -65,6 +80,7 @@ export function articleSchema(opts: {
     author: { '@type': 'Person', name: opts.author },
     publisher: { '@id': new URL('/#clinic', opts.site).href },
     mainEntityOfPage: opts.url,
+    ...(opts.image && { image: new URL(opts.image, opts.site).href }),
   };
 }
 

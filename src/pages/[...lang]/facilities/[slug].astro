@@ -28,6 +28,9 @@ const others = facilities.filter((f) => f.slug !== facility.slug);
   title={s.facilities.pageTitle.replace('{title}', facility.title)}
   description={`${facility.subtitle}. ${facility.intro}`}
   path={path}
+  heroImage={facility.image}
+  ogImage={facility.image}
+  ogImageAlt={facility.title}
   jsonLd={[
     breadcrumbSchema([
       { name: s.nav.facilities, url: abs('/facilities/') },

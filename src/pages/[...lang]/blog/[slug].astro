@@ -35,8 +35,11 @@ const otherLangs = translations.filter((l) => l !== lang);
   path={path}
   available={translations}
   type="article"
+  heroImage={cover}
+  ogImage={cover}
+  ogImageAlt={coverAlt}
   jsonLd={[
-    articleSchema({ site: Astro.site!, url, title, description, author, pubDate, updatedDate, lang: languages[lang].htmlLang }),
+    articleSchema({ site: Astro.site!, url, title, description, author, pubDate, updatedDate, image: cover, lang: languages[lang].htmlLang }),
     breadcrumbSchema([
       { name: s.blog.title, url: new URL(localePath(lang, '/blog/'), Astro.site).href },
       { name: title, url },
@@ -70,7 +73,7 @@ const otherLangs = translations.filter((l) => l !== lang);
     <div class="section">
       <div class="container narrow prose">
         <figure class="post-cover">
-          <img src={cover} alt={coverAlt} />
+          <img src={cover} alt={coverAlt} loading="lazy" decoding="async" />
         </figure>
         <Content />
       </div>

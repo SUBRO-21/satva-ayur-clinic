@@ -13,7 +13,7 @@ const s = t(lang);
 const highlightIcons = ['doctor', 'leaf', 'bottle', 'child'] as const;
 ---
 
-<Base lang={lang} title={s.about.metaTitle} description={s.about.metaDescription} path="/about/" jsonLd={[physicianSchema(Astro.site!)]}>
+<Base lang={lang} title={s.about.metaTitle} description={s.about.metaDescription} path="/about/" heroImage="/images/shirodhara-garden.jpg" jsonLd={[physicianSchema(Astro.site!)]}>
   <section class="page-head page-head-dark bg-photo" style="--bg-image: url(/images/shirodhara-garden.jpg)">
     <div class="container narrow">
       <p class="eyebrow">{clinic.tagline}…</p>

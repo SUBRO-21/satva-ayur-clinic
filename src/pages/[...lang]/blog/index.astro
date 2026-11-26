@@ -12,7 +12,7 @@ const s = t(lang);
 const [latest, ...rest] = await getPosts(lang);
 ---
 
-<Base lang={lang} title={s.blog.metaTitle} description={s.blog.metaDescription} path="/blog/">
+<Base lang={lang} title={s.blog.metaTitle} description={s.blog.metaDescription} path="/blog/" heroImage="/images/shirodhara-garden.jpg">
   <section class="page-head page-head-dark bg-photo" style="--bg-image: url(/images/shirodhara-garden.jpg)">
     <div class="container narrow">
       <p class="eyebrow">{s.blog.eyebrow}</p>

@@ -20,6 +20,11 @@ interface Props {
   noindex?: boolean;
   /** Scripts whose fonts the page needs. Defaults to the page language. */
   fontLangs?: Lang[];
+  /** Above-the-fold background photo; preloaded so it isn't discovered late via CSS. */
+  heroImage?: string;
+  /** Share-card image (og:image). Defaults to /og-default.png. */
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
 const {
@@ -33,12 +38,15 @@ const {
   isHome = false,
   noindex = false,
   fontLangs = [lang],
+  heroImage,
+  ogImage: ogImagePath,
+  ogImageAlt = clinic.name,
 } = Astro.props;
 
 const site = Astro.site!;
 const canonical = new URL(localePath(lang, path), site).href;
 const fullTitle = isHome ? `${clinic.name} | ${title}` : `${title} | ${clinic.name}`;
-const ogImage = new URL('/og-default.png', site).href;
+const ogImage = new URL(ogImagePath ?? '/og-default.png', site).href;
 
 // Extra font families per language (e.g. Noto Sans Kannada) if more languages are added.
 const fonts: Record<Lang, string> = {
@@ -69,17 +77,30 @@ const fontsHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;6
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    {!ogImagePath && <meta property="og:image:width" content="1200" />}
+    {!ogImagePath && <meta property="og:image:height" content="630" />}
     <meta property="og:locale" content={languages[lang].ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="geo.region" content="IN-KA" />
+    <meta name="geo.placename" content={clinic.address.city} />
 
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#1f3b2d" />
 
+    {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href={fontsHref} />
+    <!-- Load fonts without blocking first paint; text shows in the fallback font until they arrive. -->
+    <link rel="preload" as="style" href={fontsHref} />
+    <link rel="stylesheet" href={fontsHref} media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={fontsHref} /></noscript>
 
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />)}
   </head>

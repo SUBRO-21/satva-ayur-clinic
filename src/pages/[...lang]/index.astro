@@ -9,7 +9,7 @@ import { clinic, fullAddress } from '../../config';
 import { facilities } from '../../data/facilities';
 import { langStaticPaths, localePath, t, type Lang } from '../../i18n/ui';
 import { getPosts } from '../../lib/blog';
-import { clinicSchema } from '../../lib/schema';
+import { clinicSchema, websiteSchema } from '../../lib/schema';
 
 export const getStaticPaths = langStaticPaths;
 
@@ -27,10 +27,10 @@ const mainFacilities = facilities;
   description={s.home.metaDescription}
   path="/"
   isHome
-  jsonLd={[clinicSchema(Astro.site!)]}
+  jsonLd={[clinicSchema(Astro.site!), websiteSchema(Astro.site!)]}
 >
   <section class="hero">
-    <img class="hero-photo" src="/images/hero-shirodhara.jpg" alt="" fetchpriority="high" />
+    <img class="hero-photo" src="/images/hero-shirodhara.jpg" srcset="/images/hero-shirodhara-800.jpg 800w, /images/hero-shirodhara.jpg 1920w" sizes="100vw" alt="" fetchpriority="high" />
     <div class="container">
       <div class="hero-text">
         <h1 class="hero-title">{s.home.title}</h1>
