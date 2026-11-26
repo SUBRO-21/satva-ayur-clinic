@@ -4,7 +4,6 @@ import ContactBlock from '../../components/ContactBlock.astro';
 import ContactButtons from '../../components/ContactButtons.astro';
 import FacilityCards from '../../components/FacilityCards.astro';
 import Icon from '../../components/Icon.astro';
-import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
 import PostCard from '../../components/PostCard.astro';
 import { clinic, fullAddress } from '../../config';
 import { facilities } from '../../data/facilities';
@@ -18,8 +17,8 @@ const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const posts = (await getPosts(lang)).slice(0, 3);
 const highlightIcons = ['doctor', 'leaf', 'bottle', 'child'] as const;
-// Signature programmes stay off the home grid (keeps it at two even rows); they have their own facility page.
-const mainFacilities = facilities.filter((f) => f.slug !== 'ayur-satva-signature');
+// All seven facilities plus the "View all" tile make two even rows of four.
+const mainFacilities = facilities;
 ---
 
 <Base
@@ -94,7 +93,7 @@ const mainFacilities = facilities.filter((f) => f.slug !== 'ayur-satva-signature
   <section class="section">
     <div class="container">
       <div class="panel doctor">
-        <PhotoPlaceholder label="doctor portrait" variant="portrait" />
+        <img class="doctor-photo" src={clinic.doctor.photo} alt={`${clinic.doctor.name}, Ayurvedic doctor at Satva Ayur Health Centre`} width="800" height="1000" loading="lazy" />
         <div>
           <p class="pill-label">{s.home.doctorTitle}</p>
           <h2 class="doctor-name">{clinic.doctor.name}</h2>

@@ -11,16 +11,20 @@ export const clinic = {
   tagline: 'Life through Ayurveda',
   shortName: 'Satva Ayur',
   doctor: {
-    name: 'Dr. [Doctor Name]',
-    qualification: 'BAMS, MD (Ayurveda)', // TODO
-    registration: '[KAR Reg. No. 00000]', // TODO: state AYUSH registration number
-    experienceYears: 10, // TODO
+    name: 'Dr. Gayathri S',
+    qualification: 'BAMS',
+    registration: 'Reg. No. 32005A',
+    photo: '/images/doctor-gayathri.jpg',
+    experienceYears: 10,
   },
   mobile: '+91 94489 42843',
   mobileHref: '+919448942843',
   whatsapp: '919448942843', // TODO: confirm the mobile number is the clinic's WhatsApp
   whatsappDisplay: '+91 94489 42843',
   email: 'SatvaAyur@gmail.com',
+  // Consultation form email delivery (web3forms.com). TODO: create a free access key
+  // there with SatvaAyur@gmail.com and paste it here. While empty, the form sends via WhatsApp only.
+  web3formsKey: '',
   address: {
     street: '1753, 17th Main Rd, KSRTC Layout, 2nd Phase',
     locality: 'J. P. Nagar',
@@ -33,10 +37,9 @@ export const clinic = {
   // Used for structured data. Human-readable hours live in src/i18n/ui.ts.
   openingHours: [
     // Consultation
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '09:30', closes: '13:00' },
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '17:00', closes: '20:00' },
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:30', closes: '18:30' },
     // Therapies
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '07:00', closes: '20:00' },
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '07:00', closes: '19:00' },
   ],
   mapsLink: `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`,
   mapsEmbed: `https://www.google.com/maps?q=${mapsQuery}&output=embed`,

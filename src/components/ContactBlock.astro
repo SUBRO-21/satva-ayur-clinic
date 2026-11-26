@@ -1,7 +1,7 @@
 ---
 // Booking prompt with both contact options, used at the end of most pages.
 import ContactButtons from './ContactButtons.astro';
-import { t, type Lang } from '../i18n/ui';
+import { localePath, t, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -19,6 +19,7 @@ const s = t(lang);
       <p>{s.cta.bookText}</p>
     </div>
     <div class="btn-row">
+      <a class="btn btn-book" href={localePath(lang, '/consultation/')}>{s.cta.bookOnline}</a>
       <ContactButtons lang={lang} showNumber />
     </div>
   </div>

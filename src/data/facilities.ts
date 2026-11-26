@@ -9,7 +9,7 @@ export interface Therapy {
   /** Full-body (Sarvanga) and local (Sthanika) durations, for swedana therapies. */
   formats?: { fullBody: string; local: string };
   text?: string;
-  /** Therapies combined in a signature or weight-management programme. */
+  /** Therapies combined in a signature programme. */
   includes?: string[];
 }
 
@@ -17,6 +17,8 @@ export interface Facility {
   slug: string;
   /** Placeholder photo, in public/images. */
   image: string;
+  /** Logo shown on the card, marking our signature therapies. */
+  badge?: string;
   title: string;
   /** Sanskrit or English sub-name shown under the title. */
   subtitle: string;
@@ -29,7 +31,7 @@ export interface Facility {
 export const facilities: Facility[] = [
   {
     slug: 'abhyangam-swedana',
-    image: '/images/abhyanga.jpg',
+    image: '/images/abhyangam-swedana.jpg',
     title: 'Abhyangam & Swedana',
     subtitle: 'Ayurvedic massage and herbal steam',
     tagline: 'Medicated-oil massages and herbal fomentation.',
@@ -107,7 +109,7 @@ export const facilities: Facility[] = [
   },
   {
     slug: 'alankara',
-    image: '/images/herbal-bowl.jpg',
+    image: '/images/alankara.jpg',
     title: 'Alankara',
     subtitle: 'Ayurvedic beauty care',
     tagline: 'Ayur facials, foot care and skin therapies.',
@@ -120,7 +122,7 @@ export const facilities: Facility[] = [
   },
   {
     slug: 'panchakarma',
-    image: '/images/patra-pinda.jpg',
+    image: '/images/panchakarma.png',
     title: 'Panchakarma',
     subtitle: 'Bio-purification therapies',
     tagline: 'The five classical cleansing procedures.',
@@ -137,6 +139,7 @@ export const facilities: Facility[] = [
   {
     slug: 'ayur-satva-signature',
     image: '/images/shirobasti.jpg',
+    badge: '/images/logo.jpg',
     title: 'Ayur-Satva',
     subtitle: 'Signature combination therapies',
     tagline: 'Several classical therapies in one session.',
@@ -148,21 +151,6 @@ export const facilities: Facility[] = [
       { name: 'Ayurpusti', duration: '2 hrs', includes: ['Navara Facial', 'Full-body Navara Massage'] },
       { name: 'Kaya Kalpa', duration: '3 hrs', includes: ['Sarwanga Udwarthana', 'Sarwanga Abhyanga & Swedana', 'Shirodhara'] },
       { name: 'Tarunya', duration: '3 hrs', includes: ['Sarwanga Abhyanga & Swedana', 'Lotus Feet', 'Ayur Facial', 'Kesha Kaanti'] },
-    ],
-  },
-  {
-    slug: 'weight-management',
-    image: '/images/greeva-basti.jpg',
-    title: 'Weight Management',
-    subtitle: 'Structured programmes',
-    tagline: 'Udwarthana and Panchakarma-based programmes.',
-    intro: 'Five structured programmes combining Udwarthana powder massage, Virechana and Basti. The right programme is chosen after a consultation.',
-    therapies: [
-      { name: 'Type 1', duration: '11 days', includes: ['Virechana'] },
-      { name: 'Type 2', duration: '14 days', includes: ['6 Udwarthana', 'Virechana'] },
-      { name: 'Type 3', includes: ['6 Udwarthana', 'Virechana', '15 Udwarthana'] },
-      { name: 'Type 4', includes: ['15 Udwarthana', '3 Sadyo Virechana', 'Diet plan'] },
-      { name: 'Type 5', includes: ['6 Udwarthana', 'Virechana', '15 Udwarthana', '8 Basti'] },
     ],
   },
 ];

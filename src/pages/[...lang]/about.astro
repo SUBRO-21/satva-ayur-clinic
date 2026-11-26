@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
 import Icon from '../../components/Icon.astro';
-import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
 import { clinic } from '../../config';
 import { langStaticPaths, t, type Lang } from '../../i18n/ui';
 import { physicianSchema } from '../../lib/schema';
@@ -55,7 +54,7 @@ const highlightIcons = ['doctor', 'leaf', 'bottle', 'child'] as const;
   <section class="section tone-sand">
     <div class="container">
       <div class="panel doctor">
-        <PhotoPlaceholder label="doctor portrait" variant="portrait" />
+        <img class="doctor-photo" src={clinic.doctor.photo} alt={`${clinic.doctor.name}, Ayurvedic doctor at Satva Ayur Health Centre`} width="800" height="1000" loading="lazy" />
         <div>
           <p class="pill-label">{s.about.doctorTitle}</p>
           <h2 class="doctor-name">{clinic.doctor.name}</h2>

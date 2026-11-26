@@ -19,7 +19,8 @@ const s = t(lang);
     <li>
       <a class="card bg-photo" href={localePath(lang, `/facilities/${f.slug}/`)} style={`--bg-image: url(${f.image})`}>
         <span class="card-body">
-          <span class="card-kicker">{f.therapies.length} {f.slug === 'weight-management' ? s.facilities.programmes : s.facilities.therapies}</span>
+          {f.badge && <img class="card-badge" src={f.badge} alt="Satva logo" width="56" height="56" />}
+          <span class="card-kicker">{f.therapies.length} {s.facilities.therapies}</span>
           <span class="card-title">{f.title}</span>
           <span class="card-text">{f.tagline}</span>
           <span class="card-link">{s.home.learnMore} →</span>

@@ -52,6 +52,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
                     {facilities.map((f) => (
                       <li>
                         <a class="mega-card bg-photo" href={localePath(lang, `/facilities/${f.slug}/`)} style={`--bg-image: url(${f.image})`}>
+                          {f.badge && <img class="mega-card-badge" src={f.badge} alt="Satva logo" width="36" height="36" />}
                           <span class="mega-card-title">{f.title}</span>
                           <span class="mega-card-text">{f.tagline}</span>
                         </a>
@@ -68,7 +69,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
 
     <div class="header-actions">
       <a class="btn btn-soft btn-sm" href={whatsappLink(clinic.whatsapp, s.cta.whatsappMessage)} target="_blank" rel="noopener">{s.cta.whatsapp}</a>
-      <a class="btn btn-primary btn-sm" href={`tel:${clinic.mobileHref}`}>{s.cta.bookShort}</a>
+      <a class="btn btn-primary btn-sm" href={localePath(lang, '/consultation/')}>{s.cta.bookShort}</a>
     </div>
 
     <details class="nav-mobile">
