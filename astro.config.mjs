@@ -32,7 +32,7 @@ function lazyBlogImages() {
 
 export default defineConfig({
   // The clinic's domain (used for canonical URLs, sitemap, structured data).
-  site: 'https://www.satvaayur.in',
+  site: 'https://satvaayur.in',
   trailingSlash: 'always',
   integrations: [
     sitemap({

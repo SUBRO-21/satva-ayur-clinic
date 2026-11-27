@@ -38,9 +38,11 @@ const en = {
     therapies: '7:00 am – 7:00 pm',
   },
   home: {
-    metaTitle: 'Ayurvedic Health Centre in J. P. Nagar, Bengaluru',
+    metaTitle: 'Ayurvedic Clinic in JP Nagar, Bangalore',
     metaDescription:
-      'Satva Ayur Health Centre, J. P. Nagar: doctor consultation, Abhyangam, Shirodhara, Panchakarma, Swarna Prashana and an authorised Vaidyaratnam medicine counter.',
+      'Ayurvedic clinic in JP Nagar 2nd Phase, Bengaluru. Consult Dr. Gayathri S (BAMS, 10+ years). Abhyangam, Shirodhara, Panchakarma and Swarna Prashana.',
+    /** Small line above the hero title; part of the H1 so the page's main heading names the place. */
+    kicker: 'Ayurvedic clinic in J. P. Nagar, Bangalore',
     title: 'Ayurveda, for a healthy you, today and tomorrow.',
     tagline: '“Life through Ayurveda…”',
     highlights: [
@@ -68,13 +70,75 @@ const en = {
     doctorLink: 'More about the centre',
     visitEyebrow: 'Visit us',
     visitTitle: 'Timings & location',
+    areasTitle: 'Nearby areas we serve',
+    areasText:
+      'Patients visit us from across South Bengaluru. The centre is in KSRTC Layout, J. P. Nagar 2nd Phase, a short drive from:',
+    // Localities within a few kilometres of the centre. Edit freely.
+    areas: [
+      'J. P. Nagar 1st–9th Phase',
+      'Jayanagar',
+      'BTM Layout',
+      'Banashankari',
+      'Kumaraswamy Layout',
+      'Sarakki',
+      'Puttenahalli',
+      'Padmanabhanagar',
+      'Bannerghatta Road',
+      'Arekere',
+    ],
+    faqEyebrow: 'FAQs',
+    faqTitle: 'Questions about Satva Ayur, J. P. Nagar',
+    // Answers state facts only (AYUSH advertising rules: no promised cures or results).
+    // {address}, {phone} and {therapies} are filled in on the page.
+    faq: [
+      {
+        q: 'Who is the doctor at Satva Ayur Health Centre, JP Nagar?',
+        a: 'Consultations are with Dr. Gayathri S, BAMS (Reg. No. 32005A), an Ayurvedic physician with over 10 years of clinical experience. She has a special interest in skin disorders, diabetes and thyroid-related conditions.',
+      },
+      {
+        q: 'Where is the Ayurvedic clinic in JP Nagar located?',
+        a: 'Satva Ayur Health Centre is at {address}. It is easy to reach from Jayanagar, BTM Layout, Banashankari and the other phases of J. P. Nagar.',
+      },
+      {
+        q: 'What are the clinic timings?',
+        a: 'Doctor consultations are Monday to Saturday, 10:30 am to 6:30 pm. Therapies are available every day, 7:00 am to 7:00 pm.',
+      },
+      {
+        q: 'How do I book an appointment?',
+        a: 'Book online on our consultation page, call {phone}, or send us a WhatsApp message. Please book 24 hours in advance where you can.',
+      },
+      {
+        q: 'What happens at the first consultation?',
+        a: 'The doctor talks with you about your health and history, assesses your Prakruthi (constitution) and suggests a care plan. Please bring any recent reports and a list of the medicines you take.',
+      },
+      {
+        q: 'Which Ayurvedic therapies are available?',
+        a: 'Our facilities include {therapies}. Every therapy is planned after a consultation with our doctors.',
+      },
+      {
+        q: 'Is Panchakarma available at the centre?',
+        a: 'Yes. Panchakarma programmes are available at the centre in J. P. Nagar. The doctor decides whether Panchakarma suits you, and which procedures, after a consultation.',
+      },
+      {
+        q: 'Can I buy Ayurvedic medicines at the clinic?',
+        a: 'Yes. The centre has an Ayurvedic medicine counter and is an authorised Vaidyaratnam medicine dealer.',
+      },
+      {
+        q: 'Do you offer Swarna Prashana for children?',
+        a: 'Yes, Swarna Prashana for children is available at the centre. Call or WhatsApp us for details.',
+      },
+      {
+        q: 'Which languages do you speak?',
+        a: 'You can talk to us in English, Kannada or Hindi.',
+      },
+    ],
     blogTitle: 'From the blog',
     blogLink: 'All articles',
     learnMore: 'Learn more',
   },
   about: {
-    metaTitle: 'About the Centre and Doctor',
-    metaDescription: 'Satva Ayur Health Centre in J. P. Nagar, Bengaluru: our approach to classical Ayurveda, our doctors and therapists.',
+    metaTitle: 'About Our Ayurvedic Clinic & Doctor, JP Nagar',
+    metaDescription: 'Meet Dr. Gayathri S (BAMS, 10+ years) and the team at Satva Ayur, an Ayurvedic clinic in J. P. Nagar, Bengaluru practising classical Ayurveda.',
     title: 'About Satva Ayur',
     intro:
       'Welcome to nature’s cradle. Satva Ayur Health Centre brings classical Ayurveda — doctor consultation, therapies and authentic medicines — together in J. P. Nagar, Bengaluru.',
@@ -92,11 +156,11 @@ const en = {
     ],
   },
   facilities: {
-    metaTitle: 'Ayurvedic Facilities & Therapies',
+    metaTitle: 'Ayurvedic Therapies & Panchakarma in JP Nagar',
     metaDescription:
       'Abhyangam & Swedana, Shirodhara, eye and ear care, joint care, Ayur facials, Panchakarma, and Ayur-Satva signature therapies in J. P. Nagar, Bengaluru.',
     title: 'Facilities',
-    pageTitle: '{title} in J. P. Nagar, Bengaluru',
+    pageTitle: '{title} in JP Nagar, Bangalore',
     intro: 'Classical Ayurvedic therapies, each planned after a consultation with our doctors. Duration and medicines may be adjusted to your health, the season and the doctor’s advice.',
     servicesTitle: 'Also at the centre',
     therapies: 'therapies',
@@ -110,7 +174,7 @@ const en = {
     local: 'Local area',
   },
   blog: {
-    metaTitle: 'Ayurveda Blog',
+    metaTitle: 'Ayurveda Blog from a JP Nagar Clinic',
     metaDescription: 'Articles on Ayurvedic daily routine, diet, seasonal care and therapies from Satva Ayur Health Centre, Bengaluru.',
     title: 'Blog',
     intro: 'Practical writing on Ayurveda, diet and daily routine.',
@@ -125,8 +189,8 @@ const en = {
     otherLangs: 'Also available in',
   },
   contact: {
-    metaTitle: 'Contact and Directions',
-    metaDescription: 'Address, timings, phone, WhatsApp and email for Satva Ayur Health Centre, J. P. Nagar, Bengaluru.',
+    metaTitle: 'Contact & Directions, JP Nagar Ayurvedic Clinic',
+    metaDescription: 'Address, map, timings, phone and WhatsApp for Satva Ayur Health Centre, an Ayurvedic clinic in KSRTC Layout, J. P. Nagar 2nd Phase, Bengaluru 560078.',
     title: 'Contact',
     intro: 'Call or message on WhatsApp to book a consultation or a therapy, or to ask a question.',
     address: 'Address',
@@ -137,7 +201,7 @@ const en = {
     mapTitle: 'Map showing the centre’s location',
   },
   consultation: {
-    metaTitle: 'Book an Ayurvedic Consultation',
+    metaTitle: 'Book an Ayurvedic Doctor Consultation in JP Nagar',
     metaDescription:
       'Request an in-clinic Ayurvedic consultation with Dr. Gayathri S. at Satva Ayur Health Centre, J. P. Nagar, Bengaluru. We call or WhatsApp you to confirm the slot.',
     eyebrow: 'In-clinic consultation',

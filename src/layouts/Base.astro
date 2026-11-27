@@ -45,7 +45,8 @@ const {
 
 const site = Astro.site!;
 const canonical = new URL(localePath(lang, path), site).href;
-const fullTitle = isHome ? `${clinic.name} | ${title}` : `${title} | ${clinic.name}`;
+// Inner pages use the short name so the keyword-led title fits Google's ~60-character display.
+const fullTitle = isHome ? `${clinic.name} | ${title}` : `${title} | ${clinic.shortName}`;
 const ogImage = new URL(ogImagePath ?? '/og-default.png', site).href;
 
 // Extra font families per language (e.g. Noto Sans Kannada) if more languages are added.
